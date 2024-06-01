@@ -6,10 +6,7 @@ import java.util.ArrayList;
 public class Midiateca implements Interador {
 
     private int contador;
-
     ArrayList<Midia> midias = new ArrayList<>();
-    private Musica musica;
-    private Video video;
 
     public Midiateca() {
     }
@@ -43,10 +40,10 @@ public class Midiateca implements Interador {
         return array;
     }
 
-    public double somatorio(){
-        double somatorio=0.00;
-        for (Midia m: midias){
-            somatorio+= m.calculaLocacao();
+    public double somatorio() {
+        double somatorio = 0.00;
+        for (Midia m : midias) {
+            somatorio += m.calculaLocacao();
         }
         return somatorio;
     }
@@ -55,7 +52,7 @@ public class Midiateca implements Interador {
         for (Midia m : midias) {
             if (m instanceof Video) {
                 Video v = (Video) m;
-                if (video.getQualidade() == qualidade) {
+                if (v.getQualidade() == qualidade) {
                     return v;
                 }
             }
@@ -73,15 +70,77 @@ public class Midiateca implements Interador {
         return false;
     }
 
-    public ArrayList<Musica> musicas(){
-        ArrayList<Musica>musicas=new ArrayList<>();
-        for (Midia midia: midias){
-            if (midia instanceof Musica){
+    public ArrayList<Musica> musicas() {
+        ArrayList<Musica> musicas = new ArrayList<>();
+        for (Midia midia : midias) {
+            if (midia instanceof Musica) {
                 Musica m = (Musica) midia;
                 musicas.add(m);
             }
         }
         return musicas;
+    }
+
+    public double Double(double valor) {
+        DecimalFormat decimal = new DecimalFormat("0.00");
+        return Double.parseDouble(decimal.format(valor));
+    }
+
+    public String toString(Midia midia) {
+        if (midia instanceof Video) {
+            Video video = (Video) midia;
+            return video.getCodigo() + ","
+                    + video.getTitulo() + ","
+                    + video.getAno() + ","
+                    + video.getQualidade() + ","
+                    + "R$ " + Double(video.calculaLocacao());
+        }
+        if (midia instanceof Musica) {
+            Musica musica = (Musica) midia;
+            return musica.getCodigo() + ","
+                    + musica.getTitulo() + ","
+                    + musica.getAno() + ","
+                    + musica.getDuracao() + ","
+                    + "R$ " + Double(musica.calculaLocacao());
+        }
+        return "Objeto nao existe";
+    }
+
+   public double mediaLocacao(){
+       double soma = 0.0;
+       double media= 0.0;
+       for (Musica musica : musicas()) {
+           soma += musica.calculaLocacao();
+       }
+        media= soma / musicas().size();
+
+
+       return  media;
+   }
+
+    public Midia musicaProxima() {
+
+        if (musicas().isEmpty()) {
+            return null;
+        } else {
+
+            Musica mProxima = null;
+            double soma = 0.0;
+            for (Musica musica : musicas()) {
+                soma += musica.calculaLocacao();
+            }
+
+            double media = soma / musicas().size();
+            double menorDif = Double.MAX_VALUE;
+            for (Musica musica : musicas()) {
+                double diferenca = Math.abs(musica.calculaLocacao() - media);
+                if (diferenca < menorDif) {
+                    menorDif = diferenca;
+                    mProxima = musica;
+                }
+            }
+            return mProxima;
+        }
     }
 
 
@@ -104,32 +163,6 @@ public class Midiateca implements Interador {
         Midia next = midias.get(contador);
         contador++;
         return next;
-    }
-
-    public double Double(double valor) {
-        DecimalFormat decimal = new DecimalFormat("0.00");
-        return Double.parseDouble(decimal.format(valor));
-    }
-
-
-    public String toString(Midia midia) {
-        if (midia instanceof Video) {
-            Video video = (Video) midia;
-            return video.getCodigo() + ","
-                    + video.getTitulo() + ","
-                    + video.getAno() + ","
-                    + video.getQualidade() + ","
-                    + "R$ " + Double(video.calculaLocacao());
-        }
-        if (midia instanceof Musica) {
-            Musica musica = (Musica) midia;
-            return musica.getCodigo() + ","
-                    + musica.getTitulo() + ","
-                    + musica.getAno() + ","
-                    + musica.getDuracao() + ","
-                    + "R$ " + Double(musica.calculaLocacao());
-        }
-        return "Objeto nao existe";
     }
 
 

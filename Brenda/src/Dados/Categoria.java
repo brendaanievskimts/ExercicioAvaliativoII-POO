@@ -6,9 +6,9 @@ public enum Categoria {
     FIC("Ficcao"),
     ROM("Romance");
 
-    private  final String nome;
+    private final String nome;
 
-    private Categoria(final String nome){
+     Categoria(final String nome){
         this.nome = nome;
     }
 
