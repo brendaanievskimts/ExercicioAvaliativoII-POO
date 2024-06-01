@@ -38,6 +38,7 @@ public class ACMEMidia {
         removeMidia();
         //PontoExtra
         maisProximo();
+        maisRecente();
 
     }
 
@@ -141,12 +142,22 @@ public class ACMEMidia {
     }
 
     // PONTO EXTRAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    
+
     public void maisProximo() {
         if (midiateca.musicaProxima() == null) {
             System.out.println("9: Nenhuma musica encontrada.");
         } else {
             System.out.println("9: " + midiateca.mediaLocacao() + "," + midiateca.toString(midiateca.musicaProxima()));
+        }
+    }
+
+    public void maisRecente(){
+        if(midiateca.midiaRecente() == null){
+            System.out.println("10: Nenhuma midia encontrada.");
+        }
+        else {
+            Midia recente = midiateca.midiaRecente();
+            System.out.println("10: " + recente.getCodigo()+","+recente.getTitulo()+","+recente.getAno());
         }
     }
 

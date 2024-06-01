@@ -144,6 +144,21 @@ public class Midiateca implements Interador {
     }
 
 
+    public Midia midiaRecente() {
+        if (midias.isEmpty()) {
+            return null;
+        }
+
+        Midia recente = midias.get(0);
+        for (Midia m : midias) {
+            if (m.getAno() > recente.getAno()) {
+                recente = m;
+            }
+        }
+        return recente;
+    }
+
+
     @Override
     public void reset() {
         contador = 0;
