@@ -43,6 +43,14 @@ public class Midiateca implements Interador {
         return array;
     }
 
+    public double somatorio(){
+        double somatorio=0.00;
+        for (Midia m: midias){
+            somatorio+= m.calculaLocacao();
+        }
+        return somatorio;
+    }
+
     public Video consultaPorQualidade(int qualidade) {
         for (Midia m : midias) {
             if (m instanceof Video) {
@@ -63,6 +71,17 @@ public class Midiateca implements Interador {
             }
         }
         return false;
+    }
+
+    public ArrayList<Musica> musicas(){
+        ArrayList<Musica>musicas=new ArrayList<>();
+        for (Midia midia: midias){
+            if (midia instanceof Musica){
+                Musica m = (Musica) midia;
+                musicas.add(m);
+            }
+        }
+        return musicas;
     }
 
 

@@ -32,6 +32,9 @@ public class ACMEMidia {
         cadastraMusica();
         dadosMidia();
         mostrarCategorias();
+        mostrarQualidade();
+        maiorDuracao();
+        removeMidia();
     }
 
     // 1111111111111111111111111111111111111
@@ -85,7 +88,7 @@ public class ACMEMidia {
     //44444444444444444444444444444444444444
     public void mostrarCategorias(){
         if(midiateca.consultaPorCategoria(Categoria.valueOf(entrada.nextLine())).isEmpty()){
-            System.out.println("4: Nenhuma midia encontrada");
+            System.out.println("4: Nenhuma midia encontrada.");
         }
         else {
             for (Midia m :midiateca.consultaPorCategoria(Categoria.valueOf(entrada.nextLine()))){
@@ -96,12 +99,45 @@ public class ACMEMidia {
     //55555555555555555555555555555555555555
     public void mostrarQualidade(){
      if (midiateca.consultaPorQualidade(Integer.parseInt(entrada.nextLine())) == null){
-         System.out.println("5: Qualidade inexistete");
+         System.out.println("5: Qualidade inexistete.");
      }
      else {
          System.out.println(midiateca.toString(midiateca.consultaPorQualidade(Integer.parseInt(entrada.nextLine()))));
      }
     }
+    //666666666666666666666666666666
+    public void maiorDuracao(){
+        if (midiateca.musicas().isEmpty()){
+            System.out.println("6: Nenhuma música encontrada.");
+        }
+        else {
+            for (Musica musica : midiateca.musicas()){
+                System.out.println("6: "+ musica.getTitulo()+","+ musica.getDuracao());
+            }
+        }
+    }
+    //7777777777777777777777777777777
+    public void removeMidia(){
+        if(midiateca.removeMidia(Integer.parseInt(entrada.nextLine()))){
+            System.out.println("7: "+midiateca.toString(midiateca.consultaPorCodigo(Integer.parseInt(entrada.nextLine()))));
+        }
+        else {
+            System.out.println("7: Codigo inexistente");
+        }
+    }
+    //888888888888888888888888888888888
+    public void somaMidia(){
+        if (midiateca.somatorio() == 0.00){
+            System.out.println("8 :Nenhuma midia encontrada.");
+        }
+        else {
+            System.out.println("8: "+ midiateca.somatorio());
+        }
+    }
+
+
+
+
 
 
 
