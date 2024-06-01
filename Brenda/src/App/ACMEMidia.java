@@ -45,42 +45,40 @@ public class ACMEMidia {
     // 1111111111111111111111111111111111111
     public void cadastraVideo() {
         while (!entrada.nextLine().equals("-1")) {
-            String[] conteudo = entrada.nextLine().split(";");
-            if (conteudo.length >= 4) {
-                int codigo = Integer.parseInt(conteudo[0]);
-                String titulo = conteudo[1];
-                int ano = Integer.parseInt(conteudo[2]);
-                String categoria = conteudo[3];
-                int qualidade = Integer.parseInt(conteudo[4]);
-                if (midiateca.cadastraMidia(new Video(codigo, titulo, ano, Categoria.valueOf(categoria), qualidade))) {
-                    System.out.println("1 :" + codigo + " ," + titulo + " ," + ano + " ," + categoria + " ," + qualidade);
-                } else {
-                    System.out.println("1: Erro-video com codigo repitido: " + codigo);
-                }
+            int codigo = Integer.parseInt(entrada.nextLine());
+            String titulo = entrada.nextLine();
+            int ano = Integer.parseInt(entrada.nextLine());
+            String categoria = entrada.nextLine();
+            ;
+            int qualidade = Integer.parseInt(entrada.nextLine());
 
+            if (midiateca.cadastraMidia(new Video(codigo, titulo, ano, Categoria.valueOf(categoria), qualidade))) {
+                System.out.println("1 :" + codigo + " ," + titulo + " ," + ano + " ," + categoria + " ," + qualidade);
+            } else {
+                System.out.println("1: Erro-video com codigo repitido: " + codigo);
             }
+
         }
     }
+
 
     //2222222222222222222222222222222222222
     public void cadastraMusica() {
         while (!entrada.nextLine().equals("-1")) {
-            String[] conteudo = entrada.nextLine().split(";");
-            if (conteudo.length >= 4) {
-                int codigo = Integer.parseInt(conteudo[0]);
-                String titulo = conteudo[1];
-                int ano = Integer.parseInt(conteudo[2]);
-                String categoria = conteudo[3];
-                double duracao = Double.parseDouble(conteudo[4]);
-                if (midiateca.cadastraMidia(new Musica(codigo, titulo, ano, Categoria.valueOf(categoria), duracao))) {
-                    System.out.println("2 :" + codigo + " ," + titulo + " ," + ano + " ," + categoria + " ," + duracao);
-                } else {
-                    System.out.println("2: Erro-musica com codigo repitido: " + codigo);
-                }
-
+            int codigo = Integer.parseInt(entrada.nextLine());
+            String titulo = entrada.nextLine();
+            int ano = Integer.parseInt(entrada.nextLine());
+            String categoria = entrada.nextLine();
+            double duracao = Double.parseDouble(entrada.nextLine());
+            if (midiateca.cadastraMidia(new Musica(codigo, titulo, ano, Categoria.valueOf(categoria), duracao))) {
+                System.out.println("2 :" + codigo + " ," + titulo + " ," + ano + " ," + categoria + " ," + duracao);
+            } else {
+                System.out.println("2: Erro-musica com codigo repitido: " + codigo);
             }
+
         }
     }
+
 
     //3333333333333333333333333333333333333
     public void dadosMidia() {
@@ -151,13 +149,12 @@ public class ACMEMidia {
         }
     }
 
-    public void maisRecente(){
-        if(midiateca.midiaRecente() == null){
+    public void maisRecente() {
+        if (midiateca.midiaRecente() == null) {
             System.out.println("10: Nenhuma midia encontrada.");
-        }
-        else {
+        } else {
             Midia recente = midiateca.midiaRecente();
-            System.out.println("10: " + recente.getCodigo()+","+recente.getTitulo()+","+recente.getAno());
+            System.out.println("10: " + recente.getCodigo() + "," + recente.getTitulo() + "," + recente.getAno());
         }
     }
 
