@@ -12,7 +12,8 @@ public enum Categoria {
         this.nome = nome;
     }
 
-    public String getNome() {
+    public String getNome(){
         return nome;
     }
+
 }
