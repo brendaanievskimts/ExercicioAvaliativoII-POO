@@ -30,4 +30,5 @@ public abstract class Midia {
     }
 
     public abstract double calculaLocacao();
+
 }

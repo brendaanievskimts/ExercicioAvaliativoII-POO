@@ -14,6 +14,17 @@ public class Musica extends Midia{
 
     @Override
     public double calculaLocacao() {
-        return 0;
+        double valor = 0.0;
+
+        if(getCategoria().equals(Categoria.ACA)) {
+            valor = duracao * 0.90;
+        } else if(getCategoria().equals(Categoria.DRA)) {
+            valor = duracao * 0.70;
+        } else if(getCategoria().equals(Categoria.FIC)){
+            valor = duracao * 0.50;
+        } else if(getCategoria().equals(Categoria.ROM)){
+            valor = duracao * 0.30;
+        }
+        return valor;
     }
 }

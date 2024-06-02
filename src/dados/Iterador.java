@@ -6,4 +6,6 @@ public interface Iterador {
     public boolean hasNext();
 
     public Object next();
+
+    String toString(Midia midia);
 }

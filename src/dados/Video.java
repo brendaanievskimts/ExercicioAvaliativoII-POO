@@ -14,6 +14,15 @@ public class Video extends Midia{
 
     @Override
     public double calculaLocacao() {
-        return 0;
+        double valor = 0.0;
+
+        if(getAno() == 2024){
+            valor = 20.0;
+        } else if(getAno() >= 2000 && getAno() <= 2023){
+            valor = 15.0;
+        } else if(getAno() < 2000){
+            valor = 10.0;
+        }
+        return valor;
     }
 }
