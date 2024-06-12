@@ -7,18 +7,24 @@ public class Midiateca implements Iterador {
     private int contador;
     private ArrayList<Midia> midias;
 
-    public Midiateca(){
+    public Midiateca() {
         midias = new ArrayList<>();
     }
 
-    public boolean cadastraMidia(Midia midia){
-        return midias.add(midia);
+    public boolean cadastraMidia(Midia midia) {
+        for (Midia m : midias) {
+            if (m.getCodigo() == midia.getCodigo()) {
+                return false;
+            }
+        }
+        midias.add(midia);
+        return true;
     }
 
-    public Midia consultaPorCodigo(int codigo){
-        if(!midias.isEmpty()){
-            for(Midia m : midias){
-                if(m.getCodigo() == codigo){
+    public Midia consultaPorCodigo(int codigo) {
+        if (!midias.isEmpty()) {
+            for (Midia m : midias) {
+                if (m.getCodigo() == codigo) {
                     return m;
                 }
             }
@@ -26,12 +32,12 @@ public class Midiateca implements Iterador {
         return null;
     }
 
-    public ArrayList<Midia> consultaPorCategoria(Categoria categoria){
+    public ArrayList<Midia> consultaPorCategoria(Categoria categoria) {
         ArrayList<Midia> array = new ArrayList<>();
 
-        if(!midias.isEmpty()){
-            for(Midia m : midias){
-                if(m.getCategoria().equals(categoria)){
+        if (!midias.isEmpty()) {
+            for (Midia m : midias) {
+                if (m.getCategoria().equals(categoria)) {
                     array.add(m);
                 }
             }
@@ -39,22 +45,22 @@ public class Midiateca implements Iterador {
         return array;
     }
 
-    public boolean removeMidia(int codigo){
-        if(!midias.isEmpty()){
+    public boolean removeMidia(int codigo) {
+        if (!midias.isEmpty()) {
             midias.removeIf(m -> m.getCodigo() == codigo);
             return true;
         }
         return false;
     }
 
-    public ArrayList<Midia> dadosVideoQualidade(int qualidade){
+    public ArrayList<Midia> dadosVideoQualidade(int qualidade) {
         ArrayList<Midia> array = new ArrayList<>();
 
-        if(!midias.isEmpty()){
-            for(Midia m : midias){
-                if(m instanceof Video){
+        if (!midias.isEmpty()) {
+            for (Midia m : midias) {
+                if (m instanceof Video) {
                     Video video = (Video) m;
-                    if(video.getQualidade() == qualidade){
+                    if (video.getQualidade() == qualidade) {
                         array.add(video);
                     }
                 }
@@ -63,12 +69,12 @@ public class Midiateca implements Iterador {
         return array;
     }
 
-    public ArrayList<Musica> dadosMusicaDuracao(){
+    public ArrayList<Musica> dadosMusicaDuracao() {
         ArrayList<Musica> array = new ArrayList<>();
 
-        if(!midias.isEmpty()){
-            for(Midia midia : midias){
-                if(midia instanceof Musica) {
+        if (!midias.isEmpty()) {
+            for (Midia midia : midias) {
+                if (midia instanceof Musica) {
                     array.add((Musica) midia);
                 }
             }
@@ -76,6 +82,69 @@ public class Midiateca implements Iterador {
         return array;
     }
 
+    public double somatorioTotal() {
+        double somatorio = 0;
+
+        if (!midias.isEmpty()) {
+            for (Midia midia : midias) {
+                somatorio += midia.calculaLocacao();
+            }
+        }
+        return somatorio;
+    }
+
+    public double mediaLocacao(){
+        double soma = 0.0;
+        double media= 0.0;
+        for(Midia musica : midias){
+            if(musica instanceof Musica){
+                soma += musica.calculaLocacao();
+            }
+            media = soma / midias.size();
+        }
+        return  media;
+    }
+
+    public Midia musicaProxima() {
+        Musica musicaProx = null;
+        double soma = 0.0;
+
+        if (!midias.isEmpty() || midias == null) {
+            for(Midia m : midias){
+                if(m instanceof Musica){
+                    soma += m.calculaLocacao();
+
+                    double media = soma / midias.size();
+                    double menorDiferenca = Double.MAX_VALUE;
+
+                    for(Midia musica : midias){
+                        if(musica instanceof Musica) {
+                            double diferenca = Math.abs(musica.calculaLocacao() - media);
+                            if (diferenca < menorDiferenca) {
+                                menorDiferenca = diferenca;
+                                musicaProx = (Musica) musica;
+                            }
+                        }
+                    }
+                }
+            }
+            return musicaProx;
+        }
+        return null;
+    }
+
+    public Midia midiaRecente() {
+        if (!midias.isEmpty()) {
+            Midia midiaRecente = midias.get(0);
+            for (Midia m : midias) {
+                if (m.getAno() > midiaRecente.getAno()) {
+                    midiaRecente = m;
+                }
+                return midiaRecente;
+            }
+        }
+        return null;
+    }
 
     @Override
     public void reset() {
@@ -110,7 +179,7 @@ public class Midiateca implements Iterador {
             return video.getCodigo() + ","
                     + video.getTitulo() + ","
                     + video.getAno() + ","
-                    + video.getCategoria() + ","
+                    + video.getCategoria().getNome() + ","
                     + video.getQualidade() + ","
                     + Double(video.calculaLocacao());
         }
@@ -119,7 +188,7 @@ public class Midiateca implements Iterador {
             return musica.getCodigo() + ","
                     + musica.getTitulo() + ","
                     + musica.getAno() + ","
-                    + musica.getCategoria() + ","
+                    + musica.getCategoria().getNome() + ","
                     + musica.getDuracao() + ","
                     + Double(musica.calculaLocacao());
         }

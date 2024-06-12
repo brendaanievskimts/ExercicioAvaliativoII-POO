@@ -6,6 +6,7 @@ public enum Categoria {
     FIC("Ficcao"),
     ROM("Romance");
 
+
     private String nome;
 
     private Categoria(String nome){
