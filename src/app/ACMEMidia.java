@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+
 public class ACMEMidia {
     private Scanner entrada = new Scanner(System.in);
     private PrintStream saidaPadrao = System.out;
@@ -55,9 +56,9 @@ public class ACMEMidia {
             Video video = new Video(codigo, titulo, ano, categoria, qualidade);
 
             if(midiateca.cadastraMidia(video)) {
-                System.out.println(STR."1:\{codigo},\{titulo},\{ano},\{categoria.getNome()},\{qualidade}");
+                System.out.println("1:" + codigo+ ","+ titulo+ "," + ano + "," + categoria.getNome() + "," + qualidade);
             } else {
-                System.out.println(STR."1:Erro-video com codigo repetido: \{codigo}");
+                System.out.println("1:Erro-video com codigo repetido:" + codigo);
             }
             codigo = Integer.parseInt(entrada.nextLine());
         }
@@ -80,9 +81,9 @@ public class ACMEMidia {
             Musica musica = new Musica(codigo, titulo, ano, categoria, duracao);
 
             if(midiateca.cadastraMidia(musica)){
-                System.out.println(STR."2:\{codigo},\{titulo},\{ano},\{categoria.getNome()},\{duracao}");
+                System.out.println("2:" + codigo + "," + titulo + "," + ano + "," + categoria.getNome() + "," + duracao);
             } else{
-                System.out.println(STR."2:Erro-musica com codigo repetido: \{codigo}.");
+                System.out.println("2:Erro-musica com codigo repetido: " + codigo + ".");
             }
             codigo = Integer.parseInt(entrada.nextLine());
         }
@@ -167,7 +168,7 @@ public class ACMEMidia {
         if(somatorio == 0){
             System.out.println("8:Nenhuma midia encontrada");
         } else{
-            System.out.println(STR."8:\{somatorio}");
+            System.out.println("8:" + somatorio);
         }
     }
 
@@ -178,7 +179,7 @@ public class ACMEMidia {
         if(midia == null){
             System.out.println("9:Nenhuma musica encontrada.");
         } else {
-            System.out.println(STR."9:\{media},\{midiateca.toString(midia)}");
+            System.out.println("9:" + media + "," + midiateca.toString(midia));
         }
     }
 
@@ -188,7 +189,7 @@ public class ACMEMidia {
         if (midiaRecente == null) {
             System.out.println("10:Nenhuma midia encontrada.");
         } else {
-            System.out.println(STR."10:\{midiaRecente.getCodigo()},\{midiaRecente.getTitulo()},\{midiaRecente.getAno()}");
+            System.out.println("10:" + midiaRecente.getCodigo() + "," + midiaRecente.getTitulo()+ "," + midiaRecente.getAno());
         }
     }
 
